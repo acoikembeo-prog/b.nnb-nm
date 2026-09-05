@@ -1,0 +1,580 @@
+Con bảo ba con là đi như nào đi
+Tài thật nt ko bao h fdc
+Mẹ uống j ạ
+Vừa đá
+Cốc của mẹ ạ
+Gọi điện cho ông ngoại đi các con
+Vâng ạ
+Nâud cơm đi con
+Hỏi ba hqua cái sườn ba để đâu
+Con đang chơi dở ạ
+Ok
+Nốt đi
+Alo
+Con dậy chưa
+Đây ạ
+Ok. Để mẹ còn đi ngủ
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Football Ultimate</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#071018;
+    color:#fff;
+}
+button{
+    cursor:pointer;
+    border:0;
+    font-weight:bold;
+}
+.hidden{display:none!important}
+
+/* ===== START ===== */
+#start{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      radial-gradient(circle at 50% 20%,#145b3b,transparent 45%),
+      #071018;
+}
+.start-box{
+    width:min(850px,92%);
+    padding:50px;
+    text-align:center;
+    background:#0e1823;
+    border:1px solid #294052;
+    border-radius:25px;
+    box-shadow:0 20px 80px #000;
+}
+.logo{
+    font-size:48px;
+    font-weight:1000;
+}
+.logo b{color:#36e58b}
+.start-box p{color:#91a2b5}
+.main-btn{
+    padding:16px 30px;
+    border-radius:10px;
+    background:#36e58b;
+    color:#06130c;
+    font-size:16px;
+}
+
+/* ===== CLUB ===== */
+#clubs-screen{
+    min-height:100vh;
+    padding:40px;
+}
+.club-grid{
+    max-width:1000px;
+    margin:30px auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:18px;
+}
+.club{
+    padding:25px;
+    background:#101c29;
+    border:1px solid #293d51;
+    border-radius:18px;
+    text-align:center;
+    transition:.2s;
+}
+.club:hover{
+    transform:translateY(-5px);
+    border-color:#36e58b;
+}
+.club-logo{
+    width:75px;
+    height:75px;
+    margin:auto;
+    border-radius:50%;
+    background:#1c2d3e;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:35px;
+}
+
+/* ===== GAME ===== */
+#game{
+    min-height:100vh;
+    display:flex;
+}
+.sidebar{
+    width:230px;
+    background:#0b141e;
+    border-right:1px solid #263746;
+    padding:18px 12px;
+}
+.sidebar h2{
+    padding:0 10px 20px;
+}
+.sidebar h2 b{color:#36e58b}
+.nav{
+    width:100%;
+    padding:13px;
+    margin:3px 0;
+    text-align:left;
+    color:#9aaabc;
+    background:none;
+    border-radius:9px;
+}
+.nav:hover,.nav.active{
+    background:#183526;
+    color:#fff;
+}
+.content{
+    flex:1;
+    overflow:auto;
+}
+.topbar{
+    height:68px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 25px;
+    background:#0e1925;
+    border-bottom:1px solid #263746;
+}
+.coins{
+    padding:10px 16px;
+    border-radius:20px;
+    background:#172638;
+}
+.page{
+    display:none;
+    padding:28px;
+}
+.page.active{display:block}
+
+/* ===== HOME ===== */
+.hero{
+    padding:40px;
+    border-radius:22px;
+    background:linear-gradient(120deg,#12482f,#101e2d);
+}
+.hero h1{font-size:38px}
+.muted{color:#91a2b5}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:16px;
+}
+.card{
+    background:#101c29;
+    border:1px solid #293d51;
+    border-radius:15px;
+    overflow:hidden;
+}
+.card-photo{
+    height:170px;
+    display:flex;
+    align-items:center;
+justify-content:center;
+    background:linear-gradient(#20384e,#0d1822);
+    font-size:70px;
+}
+.card-info{
+    padding:13px;
+}
+.ovr{
+    color:#36e58b;
+    font-size:25px;
+    font-weight:1000;
+}
+
+/* ===== SQUAD ===== */
+.pitch{
+    max-width:850px;
+    height:620px;
+    margin:auto;
+    position:relative;
+    border:4px solid white;
+    border-radius:15px;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        #126d39 0,
+        #126d39 12.5%,
+        #157842 12.5%,
+        #157842 25%
+      );
+}
+.pitch:after{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:0;
+    bottom:0;
+    border-left:2px solid #ffffffaa;
+}
+.p{
+    position:absolute;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    z-index:2;
+}
+.p-icon{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#fff;
+    color:#111;
+    border:3px solid #36e58b;
+    font-size:20px;
+}
+.p-name{
+    margin-top:4px;
+    padding:3px 6px;
+    background:#06100ddd;
+    border-radius:5px;
+    font-size:11px;
+}
+
+/* ===== TACTICS ===== */
+.tactic-box{
+    max-width:800px;
+    padding:25px;
+    background:#101c29;
+    border:1px solid #293d51;
+    border-radius:18px;
+}
+select,input{
+    width:100%;
+    padding:11px;
+    margin:7px 0 20px;
+    background:#172638;
+    color:white;
+    border:1px solid #30485d;
+    border-radius:8px;
+}
+.save{
+    padding:12px 20px;
+    background:#36e58b;
+    border-radius:8px;
+}
+
+/* ===== MATCH ===== */
+#match{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    background:#07130c;
+}
+#three{
+    width:100%;
+    height:100%;
+}
+.hud{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+}
+.score{
+    position:absolute;
+    top:18px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#07101dee;
+    padding:12px 25px;
+    border-radius:10px;
+}
+.exit{
+    pointer-events:auto;
+    position:absolute;
+    top:18px;
+    left:18px;
+    padding:11px 17px;
+    border-radius:8px;
+}
+.help{
+    position:absolute;
+    bottom:18px;
+    left:18px;
+    padding:12px;
+    border-radius:9px;
+    background:#07101dcc;
+}
+.shoot{
+    pointer-events:auto;
+    position:absolute;
+    right:30px;
+    bottom:30px;
+    width:75px;
+    height:75px;
+    border-radius:50%;
+    background:#36e58b;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= START ================= -->
+
+<section id="start">
+    <div class="start-box">
+        <div class="logo">
+            FOOTBALL <b>ULTIMATE</b>
+        </div>
+
+        <h2>Tự xây đội bóng của mày</h2>
+
+        <p>
+            Chọn CLB → nhận đội hình khởi đầu →
+            mua cầu thủ → chỉnh chiến thuật → thi đấu.
+        </p>
+
+        <button class="main-btn" onclick="showClubs()">
+            BẮT ĐẦU
+        </button>
+    </div>
+</section>
+
+<!-- ================= CLUB SELECT ================= -->
+
+<section id="clubs-screen" class="hidden">
+<h1 style="text-align:center">
+        CHỌN CLB
+    </h1>
+
+    <p class="muted" style="text-align:center">
+        Chọn một CLB để bắt đầu sự nghiệp.
+    </p>
+
+    <div id="club-grid" class="club-grid"></div>
+
+</section>
+
+<!-- ================= MAIN GAME ================= -->
+
+<section id="game" class="hidden">
+
+<aside class="sidebar">
+
+    <h2>
+        FOOTBALL <b>ULTIMATE</b>
+    </h2>
+
+    <button class="nav active"
+            onclick="openPage('home',this)">
+        🏠 Sảnh
+    </button>
+
+    <button class="nav"
+            onclick="openPage('squad',this)">
+        👥 Đội hình
+    </button>
+
+    <button class="nav"
+            onclick="openPage('tactics',this)">
+        🎯 Chiến thuật
+    </button>
+
+    <button class="nav"
+            onclick="openPage('cards',this)">
+        🃏 Kho thẻ
+    </button>
+
+    <button class="nav"
+            onclick="openPage('market',this)">
+        🏪 TTCN
+    </button>
+
+    <button class="nav"
+            onclick="openPage('rank',this)">
+        🏆 Đá hạng
+    </button>
+
+</aside>
+
+<main class="content">
+
+<header class="topbar">
+
+    <b id="club-name"></b>
+
+    <div class="coins">
+        🪙 <span id="coins"></span>
+    </div>
+
+</header>
+
+<!-- HOME -->
+
+<div id="home" class="page active">
+
+    <div class="hero">
+
+        <div class="muted">
+            FOOTBALL ULTIMATE
+        </div>
+
+        <h1 id="welcome"></h1>
+
+        <p class="muted">
+            Đội hình khởi đầu của mày không có siêu sao.
+            Muốn mạnh thì tự xây.
+        </p>
+
+        <button class="main-btn"
+                onclick="startMatch()">
+            ⚽ VÀO TRẬN
+        </button>
+
+    </div>
+
+    <h2>Đội hình</h2>
+
+    <div id="home-cards" class="cards"></div>
+
+</div>
+
+<!-- SQUAD -->
+
+<div id="squad" class="page">
+
+    <h1>
+        Đội hình
+        <span id="formation-label">4-3-3</span>
+    </h1>
+
+    <div id="pitch" class="pitch"></div>
+
+</div>
+
+<!-- TACTICS -->
+
+<div id="tactics" class="page">
+
+    <h1>🎯 Chiến thuật</h1>
+
+    <div class="tactic-box">
+
+        <label>Sơ đồ</label>
+
+        <select id="formation">
+            <option>4-3-3</option>
+            <option>4-2-3-1</option>
+            <option>4-4-2</option>
+            <option>3-5-2</option>
+            <option>5-3-2</option>
+        </select>
+
+        <label>Lối chơi</label>
+
+        <select id="style">
+            <option>Cân bằng</option>
+            <option>Kiểm soát bóng</option>
+            <option>Phản công nhanh</option>
+            <option>Tấn công tổng lực</option>
+        </select>
+
+        <label>Phòng ngự</label>
+
+        <select id="defense">
+            <option>Cân bằng</option>
+            <option>Lùi sâu</option>
+            <option>Áp sát</option>
+            <option>Pressing toàn sân</option>
+        </select>
+
+        <label>Độ rộng</label>
+
+        <input id="width"
+               type="range"
+               min="1"
+max="10"
+               value="5">
+
+        <label>Độ cao hàng thủ</label>
+
+        <input id="line"
+               type="range"
+               min="1"
+               max="10"
+               value="5">
+
+        <button class="save"
+                onclick="saveTactics()">
+            💾 LƯU
+        </button>
+
+        <p id="tactic-status"></p>
+
+    </div>
+
+</div>
+
+<!-- CARDS -->
+
+<div id="cards" class="page">
+
+    <h1>🃏 Kho thẻ</h1>
+
+    <div id="cards-list" class="cards"></div>
+
+</div>
+
+<!-- MARKET -->
+
+<div id="market" class="page">
+
+    <h1>🏪 Thị trường chuyển nhượng</h1>
+
+    <div class="tactic-box">
+
+        <h2>Thị trường</h2>
+
+        <p>
+            🪙 Coins:
+            <b id="market-coins"></b>
+        </p>
+
+        <p class="muted">
+            Cầu thủ mạnh phải được mua hoặc kiếm từ phần thưởng.
+        </p>
+
+    </div>
+
+</div>
+
+<!-- RANK -->
+
+<div id="rank" class="page">
+
+    <h1>🏆 Đá hạng</h1>
+
+    <div class="tactic-box">
+
+        <h2>Bronze III</h2>
+
+        <p>Điểm: 0</p>
+
+        <button class="save"
+                onclick="startMatch()">
+            TÌM TRẬN
+        </button>
+
+    </div>
+
+</div>
+
+</main>
+</section>
+
+<!-- ================= MATCH =====
